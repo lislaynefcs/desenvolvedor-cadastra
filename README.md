@@ -25,7 +25,8 @@ O projeto desenvolvido faz parte de um teste para vaga de Desenvolvedor Front-En
 
 ## 🚀 Como executar o projeto
 
-Com o node instalado, inicie um projeto com `npm start`.
+Para instalar as dependências só é preciso executar o comando: `npm install`
+O dar start no server e nos processos para desenvolvimento é necessário rodar o comando: `npm start`
 
 ---
 
