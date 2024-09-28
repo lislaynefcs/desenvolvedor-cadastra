@@ -54,6 +54,7 @@ body {
 	}
 	.summary {
 		position: relative;
+    cursor: pointer;
 	}
 	.sacola {
 		width: 17px;
@@ -127,6 +128,7 @@ body {
 				position: relative;
 			}
 			input[type="checkbox"] {
+        cursor: pointer;
 				opacity: 0;
 				position: absolute;
 				width: 32px;
@@ -755,4 +757,11 @@ body {
 	.filters__group__list {
 		display: block;
 	}
+}
+
+.no-products {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
 }

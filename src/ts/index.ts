@@ -34,14 +34,35 @@ const fetchProducts = async () => {
 const renderProducts = (productsToRender: Product[]) => {
   const productContainer = document.getElementById('products');
   const loadMoreButton = document.querySelector('.product-list__load-more') as HTMLButtonElement;
+  const messageContainer = document.querySelector('.product-list') as HTMLElement;
 
   if (productContainer) {
     productContainer.innerHTML = '';
 
     if (productsToRender.length === 0) {
-      productContainer.innerHTML = `<p class="no-products">Não há produtos com o filtro selecionado.</p>`;
+      // Remove qualquer mensagem anterior de "Não há produtos"
+      const previousMessage = document.querySelector('.no-products') as HTMLParagraphElement | null;
+      if (previousMessage) {
+        previousMessage.remove();
+      }
+
+      // Cria dinamicamente a mensagem de "não há produtos"
+      const noProductsMessage = document.createElement('p');
+      noProductsMessage.className = 'no-products';
+      noProductsMessage.textContent = 'Não há produtos com o filtro selecionado.';
+
+      // Insere a mensagem fora do container de produtos, mas dentro de .product-list
+      messageContainer.appendChild(noProductsMessage);
+
+      // Esconde o botão de "Carregar Mais"
       loadMoreButton.style.display = 'none';
       return;
+    }
+
+    // Remove a mensagem de "não há produtos" caso produtos sejam encontrados
+    const previousMessage = document.querySelector('.no-products') as HTMLParagraphElement | null;
+    if (previousMessage) {
+      previousMessage.remove();
     }
 
     productsToRender.slice(0, visibleProductsCount).forEach((product) => {

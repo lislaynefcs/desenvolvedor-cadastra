@@ -1,5 +1,4 @@
 const path = require("path");
-
 const { series, src, dest, parallel, watch } = require("gulp");
 const webpack = require("webpack");
 const del = require("del");
@@ -7,6 +6,7 @@ const autoprefixer = require("gulp-autoprefixer");
 const sass = require("gulp-sass")(require("sass"));
 const sourcemaps = require("gulp-sourcemaps");
 const browserSync = require("browser-sync").create();
+const imagemin = require("gulp-imagemin"); // Agora deve funcionar com a versão 7.x
 
 const webpackConfig = require("./webpack.config.js");
 
@@ -78,6 +78,28 @@ function scripts() {
   );
 }
 
+function optimizeImages() {
+  return src(paths.img.src)
+    .pipe(
+      imagemin([
+        imagemin.gifsicle({ interlaced: true }),
+        imagemin.mozjpeg({ quality: 75, progressive: true }),
+        imagemin.optipng({ optimizationLevel: 5 }),
+        imagemin.svgo({
+          plugins: [
+            {
+              removeViewBox: false,
+            },
+            {
+              cleanupIDs: false,
+            },
+          ],
+        }),
+      ])
+    )
+    .pipe(dest(paths.dest + "/img"));
+}
+
 function html() {
   return src(paths.html.src).pipe(browserSync.stream()).pipe(dest(paths.dest));
 }
@@ -86,7 +108,7 @@ function img() {
   return src(paths.img.src).pipe(dest(paths.dest + "/img"));
 }
 
-const build = series(clean, parallel(styles, scripts, html, img));
+const build = series(clean, parallel(styles, scripts, html, optimizeImages));
 const dev = () => {
   watch(paths.scripts.watch, { ignoreInitial: false }, scripts).on(
     "change",
@@ -105,4 +127,5 @@ exports.build = build;
 exports.server = server;
 exports.styles = styles;
 exports.scripts = scripts;
+exports.optimizeImages = optimizeImages;
 exports.default = dev;
