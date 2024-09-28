@@ -6,13 +6,230 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Desenvolvedor Cadastra</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="main.css" />
 </head>
 
 <body>
+  <header class="header">
+    <img class="logo" src="./img/logo-cadastra.png" alt="Logo Cadastra">
+    <div class="summary">
+      <img class="sacola" src="./img/bag.png" alt="Sacola">
+      <div class="count">0</div>
+    </div>
+  </header>
+  <div class="categoria">
+    <h1>Blusas</h1>
+  </div>
 
+  <div class="filter-mobile">
+    <div class="filter">Filtrar</div>
+    <div class="order">Ordenar</div> <!-- Isso é o botão que dispara o popup -->
+  </div>
+
+  <div class="order-popup" id="order-popup" style="display: none;">
+    <div class="order-popup-content">
+      <div class="order-popup-header">
+        <h4>Ordenar</h4>
+        <button class="close-order-popup" id="close-order-popup"><img src="./img/close.svg"></button>
+      </div>
+      <ul class="order-options">
+        <li class="order-option">Mais recente</li>
+        <li class="order-option">Maior preço</li>
+        <li class="order-option">Menor preço</li>
+      </ul>
+    </div>
+  </div>
+  <div class="filter-popup" id="filter-popup" style="display: none;">
+    <div class="filter-popup-content">
+      <div class="filter-popup-header">
+        <h4>Filtrar</h4>
+        <button class="close-filter-popup" id="close-filter-popup"><img src="./img/close.svg"></button>
+      </div>
+      <div class="filter-options">
+        <div class="filter-category">
+          <div class="title">
+            <h5>Cores</h5>
+            <img src="./img/arrow.svg"></button>
+          </div>
+          <ul class="filter-list filter-open" style="display: none;">
+            <li><input type="checkbox" id="amarelo"> <label for="amarelo">Amarelo</label></li>
+            <li><input type="checkbox" id="azul"> <label for="azul">Azul</label></li>
+            <li><input type="checkbox" id="branco"> <label for="branco">Branco</label></li>
+            <li><input type="checkbox" id="cinza"> <label for="cinza">Cinza</label></li>
+            <li><input type="checkbox" id="laranja"> <label for="laranja">Laranja</label></li>
+            <li><input type="checkbox" id="verde"> <label for="verde">Verde</label></li>
+            <li><input type="checkbox" id="vermelho"> <label for="vermelho">Vermelho</label></li>
+            <li><input type="checkbox" id="preto"> <label for="preto">Preto</label></li>
+          </ul>
+        </div>
+        <div class="filter-category ">
+          <div class="title">
+            <h5>Tamanhos</h5>
+            <img src="./img/arrow.svg"></button>
+          </div>
+          <ul class="filters__group__list filter-open" style="display: none;">
+            <li>
+              <input type="checkbox" id="tamanho-p">
+              <label for="tamanho-p">P</label>
+            </li>
+            <li>
+              <input type="checkbox" id="tamanho-m">
+              <label for="tamanho-m">M</label>
+            </li>
+            <li>
+              <input type="checkbox" id="tamanho-g">
+              <label for="tamanho-g">G</label>
+            </li>
+            <li>
+              <input type="checkbox" id="tamanho-gg">
+              <label for="tamanho-gg">GG</label>
+            </li>
+            <li>
+              <input type="checkbox" id="tamanho-u">
+              <label for="tamanho-u">U</label>
+            </li>
+            <li>
+              <input type="checkbox" id="tamanho-36">
+              <label for="tamanho-36">36</label>
+            </li>
+            <li>
+              <input type="checkbox" id="tamanho-38">
+              <label for="tamanho-38">38</label>
+            </li>
+            <li>
+              <input type="checkbox" id="tamanho-40">
+              <label for="tamanho-40">40</label>
+            </li>
+          </ul>
+        </div>
+        <div class="filter-category">
+          <div class="title">
+            <h5>Faixa de Preço</h5>
+            <img src="./img/arrow.svg"></button>
+          </div>
+          <ul class="filter-list filter-open" style="display: none;">
+            <li><input type="checkbox" id="preco-0-50"> <label for="preco-0-50">de R$0 até R$50</label></li>
+            <li><input type="checkbox" id="preco-51-150"> <label for="preco-51-150">de R$51 até R$150</label></li>
+            <li><input type="checkbox" id="preco-151-300"> <label for="preco-151-300">R$151 até R$300</label></li>
+            <li><input type="checkbox" id="preco-301-500"> <label for="preco-301-500">R$301 até R$500</label></li>
+            <li><input type="checkbox" id="preco-500"> <label for="preco-500">a partir de R$500</label></li>
+          </ul>
+        </div>
+        <div class="filter-actions">
+          <button class="apply-filters">Aplicar</button>
+          <button class="clear-filters">Limpar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="container">
+    <aside class="filters">
+      <div class="filters__group color">
+        <h4 class="filters__group__title">Cores</h4>
+        <ul class="filters__group__list">
+          <li><input type="checkbox" id="amarelo"> <label for="amarelo">Amarelo</label></li>
+          <li><input type="checkbox" id="azul"> <label for="azul">Azul</label></li>
+          <li><input type="checkbox" id="branco"> <label for="branco">Branco</label></li>
+          <li><input type="checkbox" id="cinza"> <label for="cinza">Cinza</label></li>
+          <li><input type="checkbox" id="laranja"> <label for="laranja">Laranja</label></li>
+          <li><input type="checkbox" id="verde"> <label for="verde">Verde</label></li>
+          <li><input type="checkbox" id="vermelho"> <label for="vermelho">Vermelho</label></li>
+          <li><input type="checkbox" id="preto"> <label for="preto">Preto</label></li>
+        </ul>
+      </div>
+
+      <div class="filters__group size">
+        <h4 class="filters__group__title">Tamanhos</h4>
+        <ul class="filters__group__list">
+          <li>
+            <input type="checkbox" id="tamanho-p">
+            <label for="tamanho-p">P</label>
+          </li>
+          <li>
+            <input type="checkbox" id="tamanho-m">
+            <label for="tamanho-m">M</label>
+          </li>
+          <li>
+            <input type="checkbox" id="tamanho-g">
+            <label for="tamanho-g">G</label>
+          </li>
+          <li>
+            <input type="checkbox" id="tamanho-gg">
+            <label for="tamanho-gg">GG</label>
+          </li>
+          <li>
+            <input type="checkbox" id="tamanho-u">
+            <label for="tamanho-u">U</label>
+          </li>
+          <li>
+            <input type="checkbox" id="tamanho-36">
+            <label for="tamanho-36">36</label>
+          </li>
+          <li>
+            <input type="checkbox" id="tamanho-38">
+            <label for="tamanho-38">38</label>
+          </li>
+          <li>
+            <input type="checkbox" id="tamanho-40">
+            <label for="tamanho-40">40</label>
+          </li>
+        </ul>
+      </div>
+
+
+      <div class="filters__group price">
+        <h4 class="filters__group__title">Faixa de Preço</h4>
+        <ul class="filters__group__list">
+          <li><input type="checkbox" id="preco-0-50"> <label for="preco-0-50">de R$0 até R$50</label></li>
+          <li><input type="checkbox" id="preco-51-150"> <label for="preco-51-150">de R$51 até R$150</label></li>
+          <li><input type="checkbox" id="preco-151-300"> <label for="preco-151-300">R$151 até R$300</label></li>
+          <li><input type="checkbox" id="preco-301-500"> <label for="preco-301-500">R$301 até R$500</label></li>
+          <li><input type="checkbox" id="preco-500"> <label for="preco-500">a partir de R$500</label></li>
+        </ul>
+      </div>
+
+    </aside>
+
+    <section class="product-list">
+      <div class="product-list__sort-options">
+        <div class="custom-select">
+          <div class="select-trigger">Ordenar por:</div>
+          <ul class="custom-options order-options">
+            <li data-value="recent" class="custom-option order-option selected">Mais recente</li>
+            <li data-value="low-to-high" class="custom-option order-option">Menor preço</li>
+            <li data-value="high-to-low" class="custom-option order-option">Maior preço</li>
+          </ul>
+
+        </div>
+      </div>
+
+      <div id="products" class="product-list__items">
+        <!-- Os produtos serão renderizados aqui -->
+      </div>
+
+      <button class="product-list__load-more" type="button">Carregar Mais</button>
+    </section>
+
+  </div>
+
+  <footer class="footer">
+    <p class="footer__text">Cadastra: Implantação de E-commerce VTEX</p>
+  </footer>
+
+  <div class="popup-add-cart" id="popup-add-cart">
+    <div class="popup-content">
+      <p>Produto adicionado ao carrinho!</p>
+      <button class="close-popup" id="close-popup">Fechar</button>
+    </div>
+  </div>
 </body>
-<h1>Desafio Cadastra</h1>
 
 <script src="bundle.js"></script>
 
